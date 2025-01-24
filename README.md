@@ -16,6 +16,8 @@ A API tem como objetivo fornecer endpoints para realizar operações CRUD sobre 
 
 ### Funcionalidades Implementadas
 
+### Estou utilizando a API da ViaCEP para consulta e cadastro automático de endereços a partir do CEP. Gostaria de implementar algo semelhante para validação de CRMs, mas até o momento não encontrei nenhuma API disponível para isso.
+
 #### 1. CRUD de Médicos
 - **Cadastro**: Adicionar novos médicos com informações como nome, especialidade, CRM, email, telefone e endereço.
 - **Leitura**: Consultar a lista de médicos ou informações específicas de um médico pelo ID.
@@ -34,7 +36,7 @@ A API tem como objetivo fornecer endpoints para realizar operações CRUD sobre 
 - **Exclusão**: Cancelar consultas agendadas.
 
 ### Funcionalidades em Desenvolvimento
-Atualmente, o projeto está finalizando a implementação dos endpoints de **PUT** e **DELETE** para médicos, como parte do CRUD.
+Atualmente, o projeto está no começo  do Desenvolvimento do CRUD dos pacientes.
 
 ### Estrutura do Banco de Dados
 - **Médicos**: Contém informações sobre os médicos, incluindo nome, especialidade, CRM, email, telefone e endereço.
@@ -57,5 +59,7 @@ Atualmente, o projeto está finalizando a implementação dos endpoints de **PUT
 ### Testes (Postman)
 - (POST) http://localhost:8080/vollmed/medicos/criar
 - (GET) http://localhost:8080/vollmed/medicos/lista
-- Em breve...
+- (PUT) http://localhost:8080/vollmed/medicos/atualizar/32/ (Atualiza Nome, telefone e CEP)
+- (PUT) http://localhost:8080/vollmed/medicos/atualizar/32/endereco (Atualiza Numero e Complemento)
+- (DEL) http://localhost:8080/vollmed/medicos/deletar/{id}
 

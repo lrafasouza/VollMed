@@ -22,19 +22,18 @@ public class MedicoService {
 
 	// Inicio -> Telefone
 	public String validarTelefone(String telefone) {
-	    if (telefone == null || telefone.isEmpty()) {
-	        throw new IllegalArgumentException("Telefone obrigatório");
-	    }
+		if (telefone == null || telefone.isEmpty()) {
+			throw new IllegalArgumentException("Telefone obrigatório");
+		}
 
-	    String numeroLimpo = telefone.replaceAll("[^\\d]", "");
+		String numeroLimpo = telefone.replaceAll("[^\\d]", "");
 
-	    if (numeroLimpo.length() == 11 && numeroLimpo.charAt(2) == '9') {
-	        return numeroLimpo;
-	    } else {
-	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Número de telefone inválido");
-	    }
+		if (numeroLimpo.length() == 11 && numeroLimpo.charAt(2) == '9') {
+			return numeroLimpo;
+		} else {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Número de telefone inválido");
+		}
 	}
-
 
 	public List<MedicoModel> getAll() {
 		return medicoRepository.findAll();
@@ -44,36 +43,33 @@ public class MedicoService {
 		return medicoRepository.existsBycrm(crm);
 
 	}
-	
-	public Page<MedicoModel> getAll(Pageable pageable) {
-        return medicoRepository.findAll(pageable);
-    }
 
+	public Page<MedicoModel> findAllByAtivoTrue(Pageable pageable) {
+		return medicoRepository.findAllByAtivoTrue(pageable);
+	}
 
 	// Fim -> Telefone
 
 	public ResponseEntity<MedicoModel> salvarPessoa(MedicoModel medicoModel, HttpServletRequest request) {
 
-	    String telefone = validarTelefone(medicoModel.getTelefone());
+		String telefone = validarTelefone(medicoModel.getTelefone());
 
-	    if (telefone == null) {
-	    	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preencher Telefone");
-	    }
+		if (telefone == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preencher Telefone");
+		}
 
-	    if(medicoModel.getCrm() == null) {
-	    	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preencher CRM");
-	    }
-	    
-	    
-	    
-	    if (existsBycrm(medicoModel.getCrm())) {
-	    	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CRM já cadastrado");
-	    }
+		if (medicoModel.getCrm() == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preencher CRM");
+		}
 
-	    medicoModel.setTelefone(telefone);
-	    MedicoModel savedMedico = medicoRepository.save(medicoModel);
+		if (existsBycrm(medicoModel.getCrm())) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CRM já cadastrado");
+		}
 
-	    return ResponseEntity.status(HttpStatus.CREATED).body(savedMedico);
+		medicoModel.setTelefone(telefone);
+		MedicoModel savedMedico = medicoRepository.save(medicoModel);
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(savedMedico);
 	}
 
 }

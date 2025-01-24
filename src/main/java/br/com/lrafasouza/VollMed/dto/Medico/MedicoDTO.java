@@ -1,4 +1,4 @@
-package br.com.lrafasouza.VollMed.dto;
+package br.com.lrafasouza.VollMed.dto.Medico;
 
 import br.com.lrafasouza.VollMed.models.Medico.Especialidades;
 import jakarta.validation.constraints.Email;
