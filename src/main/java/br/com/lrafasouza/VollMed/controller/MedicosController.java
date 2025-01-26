@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.lrafasouza.VollMed.Utils.CEPServices;
 import br.com.lrafasouza.VollMed.Utils.ErrorResponse;
 import br.com.lrafasouza.VollMed.dto.EnderecoDTO;
 import br.com.lrafasouza.VollMed.dto.Medico.MedicoUpdateDTO;
 import br.com.lrafasouza.VollMed.dto.Medico.DetalhesMedicoDTO;
 import br.com.lrafasouza.VollMed.models.Medico.MedicoModel;
 import br.com.lrafasouza.VollMed.repository.MedicoRepository;
-import br.com.lrafasouza.VollMed.service.CEPServices;
-import br.com.lrafasouza.VollMed.service.Medico.MedicoService;
+import br.com.lrafasouza.VollMed.service.MedicoService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;

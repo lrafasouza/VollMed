@@ -1,4 +1,4 @@
-package br.com.lrafasouza.VollMed.service;
+package br.com.lrafasouza.VollMed.Utils;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;

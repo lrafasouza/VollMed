@@ -1,10 +1,10 @@
 package br.com.lrafasouza.VollMed.models.Medico;
 
 
+import br.com.lrafasouza.VollMed.Utils.CEPServices;
 import br.com.lrafasouza.VollMed.dto.EnderecoDTO;
 import br.com.lrafasouza.VollMed.dto.Medico.MedicoDTO;
 import br.com.lrafasouza.VollMed.dto.Medico.MedicoUpdateDTO;
-import br.com.lrafasouza.VollMed.service.CEPServices;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;

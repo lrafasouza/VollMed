@@ -1,4 +1,4 @@
-package br.com.lrafasouza.VollMed.service.Medico;
+package br.com.lrafasouza.VollMed.service;
 
 import java.util.List;
 
@@ -34,6 +34,7 @@ public class MedicoService {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Número de telefone inválido");
 		}
 	}
+	// Fim -> Telefone
 
 	public List<MedicoModel> getAll() {
 		return medicoRepository.findAll();
@@ -48,7 +49,7 @@ public class MedicoService {
 		return medicoRepository.findAllByAtivoTrue(pageable);
 	}
 
-	// Fim -> Telefone
+
 
 	public ResponseEntity<MedicoModel> salvarPessoa(MedicoModel medicoModel, HttpServletRequest request) {
 
