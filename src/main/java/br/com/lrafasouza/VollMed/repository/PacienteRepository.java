@@ -6,6 +6,6 @@ import br.com.lrafasouza.VollMed.models.Paciente.PacienteModel;
 
 public interface PacienteRepository extends JpaRepository<PacienteModel, Long>{
 
-	PacienteModel findBycpf(String documento);
+	PacienteModel findByCpf(String documento);
 	
 }

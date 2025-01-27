@@ -41,16 +41,16 @@ public class MedicosController {
 	@Autowired
 	private MedicoRepository medicoRepository;
 
-	// Visão para os pacientes
-	@GetMapping("/lista")
-	public Page<DetalhesMedicoDTO> listaMedicos(@PageableDefault(sort = { "nome" }) Pageable paginacao) {
-		return medicoService.findAllByAtivoTrue(paginacao).map(DetalhesMedicoDTO::new);
-	}
-
-	// Visão para os Administradores
+	// Visão ADMIN
 	@GetMapping("/lista/admin")
 	public List<MedicoModel> getAll() {
 		return medicoService.getAll();
+	}
+	
+	// Visão CLIENTES
+	@GetMapping("/lista")
+	public Page<DetalhesMedicoDTO> listaMedicos(@PageableDefault(sort = { "nome" }) Pageable paginacao) {
+		return medicoService.findAllByAtivoTrue(paginacao).map(DetalhesMedicoDTO::new);
 	}
 
 	@PostMapping("/criar")

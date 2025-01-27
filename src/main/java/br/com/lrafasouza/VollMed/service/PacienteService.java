@@ -4,12 +4,12 @@ import java.util.InputMismatchException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import br.com.lrafasouza.VollMed.models.Medico.MedicoModel;
 import br.com.lrafasouza.VollMed.models.Paciente.PacienteModel;
 import br.com.lrafasouza.VollMed.repository.PacienteRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -73,14 +73,14 @@ public class PacienteService {
 		return false;
 	}
 	
-	public boolean existsByDocumento(String documento) {
-		return pacienteRepository.findBycpf(documento) != null;
+	public boolean existsByCpf(String documento) {
+		return pacienteRepository.findByCpf(documento) != null;
 	}
 	
 	// Inicio -> Telefone
 	public String validarTelefone(String telefone) {
 		if (telefone == null || telefone.isEmpty()) {
-			throw new IllegalArgumentException("Telefone obrigatório");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preencher Telefone");
 		}
 
 		String numeroLimpo = telefone.replaceAll("[^\\d]", "");
@@ -97,25 +97,24 @@ public class PacienteService {
 		return pacienteRepository.findAll();
 	}
 	
+	public Page<PacienteModel> findAll(Pageable pageable) {
+		return pacienteRepository.findAll(pageable);
+	}
+	
 	
 	public ResponseEntity<PacienteModel> salvarPessoa(PacienteModel pacienteModel, HttpServletRequest request) {
 
 		String telefone = validarTelefone(pacienteModel.getTelefone());
-
-		if (telefone == null) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preencher Telefone");
+		
+		if(pacienteModel.getEmail() == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preencher E-mail");
 		}
 		
 		if(!validarDocumento(pacienteModel.getCpf())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF invalido");
 		}
-	
 
-		if (pacienteModel.getCpf() == null) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Preencher CPF");
-		}
-
-		if (existsByDocumento(pacienteModel.getCpf())) {
+		if (existsByCpf(pacienteModel.getCpf())) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF já cadastrado");
 		}
 
